@@ -43,4 +43,46 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get snackbarGenerationStopped => '🛑 Generation stopped.';
+
+  @override
+  String get historyTitle => 'Chat History';
+
+  @override
+  String get historyEmptyTitle => 'No chat history yet';
+
+  @override
+  String get historyEmptySubtitle =>
+      'Your previous chats will appear here once you start using Ocean GPT.';
+
+  @override
+  String get historyDialogTitle => 'Clear chat history?';
+
+  @override
+  String get historyDialogMessage =>
+      'This will permanently delete all saved messages.';
+
+  @override
+  String get historyDialogCancel => 'Cancel';
+
+  @override
+  String get historyDialogDelete => 'Delete';
+
+  @override
+  String get historyDialogOk => 'OK';
+
+  @override
+  String get historyClearedMessage => 'Chat history cleared.';
+
+  @override
+  String get historyDeleteSingleTitle => 'Delete this chat?';
+
+  @override
+  String get historyDeleteSingleMessage =>
+      'This message will be permanently removed from your history.';
+
+  @override
+  String get historyDeletedMessage => 'Message deleted';
+
+  @override
+  String get historyClearTooltip => 'Clear all history';
 }

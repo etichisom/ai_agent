@@ -32,5 +32,18 @@
   "snackbarGenerationStopped": "🛑 Generation stopped.",
   "@snackbarGenerationStopped": {
     "description": "SnackBar message when user stops generation."
-  }
+  },
+  "historyTitle": "Chat History",
+  "historyEmptyTitle": "No chat history yet",
+  "historyEmptySubtitle": "Your previous chats will appear here once you start using Ocean GPT.",
+  "historyDialogTitle": "Clear chat history?",
+  "historyDialogMessage": "This will permanently delete all saved messages.",
+  "historyDialogCancel": "Cancel",
+  "historyDialogDelete": "Delete",
+  "historyDialogOk": "OK",
+  "historyClearedMessage": "Chat history cleared.",
+  "historyDeleteSingleTitle": "Delete this chat?",
+  "historyDeleteSingleMessage": "This message will be permanently removed from your history.",
+  "historyDeletedMessage": "Message deleted",
+  "historyClearTooltip": "Clear all history"
 }

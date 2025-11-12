@@ -1,15 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:genui/genui.dart';
+import 'package:hack_the_future_starter/const.dart';
 import 'package:hack_the_future_starter/features/chat/view/chat_screen.dart';
 import 'package:hack_the_future_starter/l10n/app_localizations.dart';
 import 'package:logging/logging.dart';
-
+import 'package:hive_ce_flutter/adapters.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Hive.initFlutter();
+  await Hive.openBox<String>(kChatStorageKey);
   configureGenUiLogging(level: Level.ALL);
   runApp(const MyApp());
 }

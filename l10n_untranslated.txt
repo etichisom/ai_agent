@@ -4,6 +4,19 @@
     "emptyWelcomeSubtitle",
     "emptyExamplePrompt",
     "emptyStopTip",
-    "snackbarGenerationStopped"
+    "snackbarGenerationStopped",
+    "historyTitle",
+    "historyEmptyTitle",
+    "historyEmptySubtitle",
+    "historyDialogTitle",
+    "historyDialogMessage",
+    "historyDialogCancel",
+    "historyDialogDelete",
+    "historyDialogOk",
+    "historyClearedMessage",
+    "historyDeleteSingleTitle",
+    "historyDeleteSingleMessage",
+    "historyDeletedMessage",
+    "historyClearTooltip"
   ]
 }

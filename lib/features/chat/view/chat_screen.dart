@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hack_the_future_starter/features/chat/view/empty_state.dart';
+import 'package:hack_the_future_starter/features/chat/view/component/empty_state.dart';
 import 'package:hack_the_future_starter/l10n/app_localizations.dart';
 import '../viewmodel/chat_view_model.dart';
+import 'chat_history_screen.dart';
 import 'component/chat_bubble.dart';
 import 'component/input_bar.dart';
 import 'component/typing_bubble.dart';
@@ -58,6 +59,24 @@ class _ChatScreenState extends State<ChatScreen> {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("🛑 Generation stopped.")));
   }
 
+  void _showChatHistory(BuildContext context) {
+    showCupertinoModalPopup(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return FractionallySizedBox(
+          heightFactor: 0.75, // 👈 Sheet covers 75% of screen height
+          child: ClipRRect(
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+            child: ChatHistoryScreen(
+              viewModel: _viewModel,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -70,6 +89,10 @@ class _ChatScreenState extends State<ChatScreen> {
           backgroundColor: Theme.of(context).colorScheme.surface,
           middle: Text(l10n.appBarTitle, style: const TextStyle(fontWeight: FontWeight.w600)),
           border: const Border(bottom: BorderSide(color: Color(0x33000000), width: 0.5)),
+          trailing: GestureDetector(
+            onTap: () => _showChatHistory(context), // 👈 new function
+            child: const Icon(CupertinoIcons.clock, color: Colors.blueAccent, size: 24),
+          ),
         ),
       ),
       body: SafeArea(

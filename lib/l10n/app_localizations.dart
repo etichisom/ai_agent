@@ -163,6 +163,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'🛑 Generation stopped.'**
   String get snackbarGenerationStopped;
+
+  /// No description provided for @historyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat History'**
+  String get historyTitle;
+
+  /// No description provided for @historyEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No chat history yet'**
+  String get historyEmptyTitle;
+
+  /// No description provided for @historyEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your previous chats will appear here once you start using Ocean GPT.'**
+  String get historyEmptySubtitle;
+
+  /// No description provided for @historyDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear chat history?'**
+  String get historyDialogTitle;
+
+  /// No description provided for @historyDialogMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete all saved messages.'**
+  String get historyDialogMessage;
+
+  /// No description provided for @historyDialogCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get historyDialogCancel;
+
+  /// No description provided for @historyDialogDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get historyDialogDelete;
+
+  /// No description provided for @historyDialogOk.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get historyDialogOk;
+
+  /// No description provided for @historyClearedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat history cleared.'**
+  String get historyClearedMessage;
+
+  /// No description provided for @historyDeleteSingleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this chat?'**
+  String get historyDeleteSingleTitle;
+
+  /// No description provided for @historyDeleteSingleMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This message will be permanently removed from your history.'**
+  String get historyDeleteSingleMessage;
+
+  /// No description provided for @historyDeletedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Message deleted'**
+  String get historyDeletedMessage;
+
+  /// No description provided for @historyClearTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all history'**
+  String get historyClearTooltip;
 }
 
 class _AppLocalizationsDelegate

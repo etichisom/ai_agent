@@ -1,0 +1,1 @@
+const kChatStorageKey = 'chat_history';
