@@ -18,7 +18,9 @@ class ChatViewModel extends ChangeNotifier {
 
   GenUiHost get host => _conversation.host;
 
-  ValueListenable<bool> get isProcessing => _conversation.isProcessing;
+  bool _isProcessing = false;
+
+  bool get isProcessing => _isProcessing;
 
   String? _lastUserMessage;
 
@@ -57,18 +59,24 @@ class ChatViewModel extends ChangeNotifier {
        // _messages.add(ChatMessageModel(text: err.error.toString(), isError: true));
         notifyListeners();
       },
-    );
+    )..isProcessing.addListener((){
+      _isProcessing = _conversation.isProcessing.value;
+      notifyListeners();
+    });
   }
 
 
   void _log(String msg) {
+    final logMessage = "[${DateTime.now().toIso8601String()}] $msg";
     _runLog.add("[${DateTime.now().toIso8601String()}] $msg");
+    debugPrint(logMessage);
     notifyListeners();
   }
 
   Future<void> send(String text) async {
     try{
       if (text.trim().isEmpty) return;
+      _messages.clear();
       final message = ChatMessageModel(text: text, isUser: true);
       _lastUserMessage = text;
       _messages.add(message);
@@ -83,7 +91,12 @@ class ChatViewModel extends ChangeNotifier {
 
   void disposeConversation() {
     _conversation.dispose();
+    _isProcessing = false;
+    notifyListeners();
+    init();
+    debugPrint('🛑 Agent processing aborted.');
   }
+
 
   Future<void> _saveHistory(ChatMessageModel message) async {
     final chatBox = Hive.box<String>(kChatStorageKey);

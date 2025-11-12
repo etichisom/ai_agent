@@ -68,15 +68,12 @@ class _ChatScreenState extends State<ChatScreen> {
           heightFactor: 0.75, // 👈 Sheet covers 75% of screen height
           child: ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-            child: ChatHistoryScreen(
-              viewModel: _viewModel,
-            ),
+            child: ChatHistoryScreen(viewModel: _viewModel),
           ),
         );
       },
     );
   }
-
 
   void _showRunLog(BuildContext context) {
     showCupertinoModalPopup(
@@ -89,8 +86,7 @@ class _ChatScreenState extends State<ChatScreen> {
               itemCount: _viewModel.runLog.length,
               itemBuilder: (_, i) => Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(_viewModel.runLog[i],
-                    style: const TextStyle(fontFamily: 'monospace', fontSize: 13)),
+                child: Text(_viewModel.runLog[i], style: const TextStyle(fontFamily: 'monospace', fontSize: 13)),
               ),
             ),
           ),
@@ -98,7 +94,6 @@ class _ChatScreenState extends State<ChatScreen> {
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -152,29 +147,19 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     ),
 
-                  // Typing indicator or stop button
-                  ValueListenableBuilder<bool>(
-                    valueListenable: _viewModel.isProcessing,
-                    builder: (_, isProcessing, __) {
-                      return AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 250),
-                        child: isProcessing ? const Padding(padding: EdgeInsets.only(bottom: 8.0), child: TypingBubble()) : const SizedBox.shrink(),
-                      );
-                    },
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 250),
+                    child: _viewModel.isProcessing
+                        ? const Padding(padding: EdgeInsets.only(bottom: 8.0), child: TypingBubble())
+                        : const SizedBox.shrink(),
                   ),
 
-                  // Typing indicator or stop button
-                  ValueListenableBuilder<bool>(
-                    valueListenable: _viewModel.isProcessing,
-                    builder: (_, isProcessing, __) {
-                      return InputBar(
-                        onStop: _stop,
-                        isProcessing: isProcessing,
-                        controller: _textController,
-                        onSend: _send,
-                        hintText: l10n.hintTypeMessage,
-                      );
-                    },
+                  InputBar(
+                    onStop: _stop,
+                    isProcessing: _viewModel.isProcessing,
+                    controller: _textController,
+                    onSend: _send,
+                    hintText: l10n.hintTypeMessage,
                   ),
                 ],
               ),
