@@ -123,6 +123,8 @@ class _MessageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final surfaceId = model.surfaceId;
+    // print('<>============================');
+    // print(surfaceId);
 
     if (surfaceId == null) {
       final label = model.isError
