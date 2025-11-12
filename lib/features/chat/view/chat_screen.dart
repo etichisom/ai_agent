@@ -133,7 +133,6 @@ class _MessageView extends StatelessWidget {
       final content = model.text ?? '';
       return Text('$label: $content');
     }
-
     return GenUiSurface(host: host, surfaceId: surfaceId);
   }
 }

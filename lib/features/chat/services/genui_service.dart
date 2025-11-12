@@ -1,9 +1,30 @@
-import 'package:flutter_genui/flutter_genui.dart';
-import 'package:flutter_genui_firebase_ai/flutter_genui_firebase_ai.dart';
+import 'package:genui_firebase_ai/genui_firebase_ai.dart';
+import 'package:genui/genui.dart';
+import 'package:hack_the_future_starter/features/chat/catalog/bar_chart_widget.dart';
+import 'package:hack_the_future_starter/features/chat/catalog/donut_chart_item.dart';
+import 'package:hack_the_future_starter/features/chat/catalog/heat_map_item.dart';
+import 'package:hack_the_future_starter/features/chat/catalog/line_chart_item.dart';
+import 'package:hack_the_future_starter/features/chat/catalog/pie_chart_widget.dart';
+import 'package:hack_the_future_starter/features/chat/catalog/radar_chart_item.dart';
+import 'package:hack_the_future_starter/features/chat/catalog/scatter_chart_item.dart';
 
+// ✅ Import the new catalog items (replaces the old *widget.dart imports)
+
+
+/// A service class that sets up GenUI and Firebase AI for the Ocean Explorer agent.
 class GenUiService {
-  Catalog createCatalog() => CoreCatalogItems.asCatalog();
+  /// Creates a unified catalog including all default GenUI components + custom charts.
+  Catalog createCatalog() => CoreCatalogItems.asCatalog().copyWith([
+    pieChart,
+    barChart,
+    lineChart,
+    donutChart,
+    radarChart,
+    scatterChart,
+    heatMap,
+  ]);
 
+  /// Creates a Firebase AI content generator with our catalog and system prompt.
   FirebaseAiContentGenerator createContentGenerator({Catalog? catalog}) {
     final cat = catalog ?? createCatalog();
     return FirebaseAiContentGenerator(
@@ -13,6 +34,7 @@ class GenUiService {
   }
 }
 
+/// The main system prompt for the Ocean Explorer AI agent.
 const _oceanExplorerPrompt = '''
 # Ocean Explorer Agent (Hack The Future 2025)
 
@@ -60,35 +82,28 @@ You reason through an **agentic workflow** (Perceive → Plan → Act → Reflec
 You do **not** generate Flutter code.  
 Instead, output **JSON structures** describing UI layouts and data visualizations, which GenUI converts into widgets.
 
-### Supported UI Components
+## Output format (STRICT)
+Return ONE JSON object only (no markdown fences, no prose). Use these keys:
 
-| Category | Component | Description |
-|-----------|------------|--------------|
-| Structure | `Column`, `Row`, `Card` | Organize content |
-| Text | `Text`, `Heading` | Describe or summarize insights |
-| Charts | `LineChart`, `BarChart`, `PieChart`, `HeatMap` | Visualize numeric or categorical data |
-| Geographic | `Map` | Show spatial data (coordinates, markers) |
-| Input | `DatePicker`, `TextField`, `Slider` | Collect user input for filtering or exploration |
+- type: Card | Column | Row | Heading | Text | BarChart | PieChart | DonutChart | LineChart | RadarChart | ScatterChart | HeatMap | Map
+- title (optional)
+- child (single catalog) or children (array of widgets)
+- data for charts:
+  { 
+    "labels": [...], 
+    "values" or "matrix": { "literalArray": [...] },
+    "title": {"literalString": "..."} 
+  }
 
----
-
-## 📊 Visualization Examples
-
-### 1. Line Graph (Trend)
-```json
+Example (no backticks):
 {
   "type": "Card",
-  "title": "Temperature Trend – North Sea (Past Month)",
+  "title": "Average Ocean Depth (meters)",
   "child": {
-    "type": "LineChart",
+    "type": "BarChart",
     "data": {
-      "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
-      "datasets": [
-        {
-          "label": "Surface Temp (°C)",
-          "values": [12.3, 12.8, 13.1, 13.6]
-        }
-      ]
+      "labels": ["Pacific","Atlantic","Indian","Southern","Arctic"],
+      "datasets": [ { "label": "Depth (m)", "values": [4280,3646,3741,3270,1205] } ]
     }
   }
 }
