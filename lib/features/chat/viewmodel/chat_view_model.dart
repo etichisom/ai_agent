@@ -20,6 +20,8 @@ class ChatViewModel extends ChangeNotifier {
 
   ValueListenable<bool> get isProcessing => _conversation.isProcessing;
 
+  String? _lastUserMessage;
+
   final List<ChatMessageModel> _messages = [];
 
   final List<ChatMessageModel> _messagesHistory = [];
@@ -27,6 +29,9 @@ class ChatViewModel extends ChangeNotifier {
   List<ChatMessageModel> get messages => List.unmodifiable(_messages);
 
   List<ChatMessageModel> get messagesHistory => List.unmodifiable(_messagesHistory);
+
+  final List<String> _runLog = [];
+  List<String> get runLog => List.unmodifiable(_runLog);
 
   void init() {
     _catalog = _service.createCatalog();
@@ -39,25 +44,41 @@ class ChatViewModel extends ChangeNotifier {
       onSurfaceAdded: (s) {
         _messages.add(ChatMessageModel(surfaceId: s.surfaceId));
         notifyListeners();
+        _log("Surface added: ${s.surfaceId}");
       },
       onTextResponse: (text) {
         _messages.add(ChatMessageModel(text: text));
         notifyListeners();
+        _log("Text response: $text");
       },
       onError: (err) {
-        _messages.add(ChatMessageModel(text: err.error.toString(), isError: true));
+        _log("Error occurred: ${err.error}");
+        _useMockResponse(_lastUserMessage ?? "");
+       // _messages.add(ChatMessageModel(text: err.error.toString(), isError: true));
         notifyListeners();
       },
     );
   }
 
-  Future<void> send(String text) async {
-    if (text.trim().isEmpty) return;
-    final message = ChatMessageModel(text: text, isUser: true);
-    _messages.add(message);
-    _saveHistory(message);
+
+  void _log(String msg) {
+    _runLog.add("[${DateTime.now().toIso8601String()}] $msg");
     notifyListeners();
-    await _conversation.sendRequest(UserMessage([TextPart(text)]));
+  }
+
+  Future<void> send(String text) async {
+    try{
+      if (text.trim().isEmpty) return;
+      final message = ChatMessageModel(text: text, isUser: true);
+      _lastUserMessage = text;
+      _messages.add(message);
+      _saveHistory(message);
+      notifyListeners();
+      await _conversation.sendRequest(UserMessage([TextPart(text)]));
+    }catch(e){
+      _log("Send failed: $e — using fallback");
+      _useMockResponse(text);
+    }
   }
 
   void disposeConversation() {
@@ -94,4 +115,43 @@ class ChatViewModel extends ChangeNotifier {
       debugPrint('⚠️ Failed to load history: $e');
     }
   }
+
+
+
+  void _useMockResponse(String text) {
+    final mockResponses = {
+      "temperature": "🌡️ Average ocean temperature: 15.4°C (mock data)",
+      "salinity": "🧂 Average salinity: 35 PSU (mock data)",
+      "waves": "🌊 Wave height: 2.1m (mock data)",
+      "depth": "📏 Average ocean depth: 3,688 meters (mock data)",
+      "currents": "🌊 Ocean currents moving eastward at ~1.5 knots (mock data)",
+    };
+
+    // Try to find a match for the user's text
+    final response = mockResponses.entries.firstWhere(
+          (e) => text.toLowerCase().contains(e.key),
+      orElse: () => const MapEntry("default", ""),
+    );
+
+    // 🧩 If no match found, show a generic fallback response
+    final fallbackMessage = response.value.isEmpty
+        ? '''
+🌊 **Mock Ocean Data (Offline Mode)**
+Since live data isn't available right now, here’s a placeholder response:
+
+- Average Sea Temperature: **16.2°C**
+- Average Salinity: **34.8 PSU**
+- Wave Height: **2.3m**
+- Current Speed: **1.2 knots**
+- Note: This is **mock data** used while the AI service is offline.
+'''
+        : response.value;
+
+    // Add it as a message
+    _messages.add(ChatMessageModel(text: fallbackMessage));
+    _log("⚠️ Mock response used for '${response.key.isEmpty ? "default" : response.key}'");
+    notifyListeners();
+  }
+
+
 }

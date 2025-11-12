@@ -77,6 +77,29 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+
+  void _showRunLog(BuildContext context) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (_) {
+        return CupertinoPageScaffold(
+          navigationBar: const CupertinoNavigationBar(middle: Text("Run Log")),
+          child: SafeArea(
+            child: ListView.builder(
+              itemCount: _viewModel.runLog.length,
+              itemBuilder: (_, i) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(_viewModel.runLog[i],
+                    style: const TextStyle(fontFamily: 'monospace', fontSize: 13)),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -89,9 +112,19 @@ class _ChatScreenState extends State<ChatScreen> {
           backgroundColor: Theme.of(context).colorScheme.surface,
           middle: Text(l10n.appBarTitle, style: const TextStyle(fontWeight: FontWeight.w600)),
           border: const Border(bottom: BorderSide(color: Color(0x33000000), width: 0.5)),
-          trailing: GestureDetector(
-            onTap: () => _showChatHistory(context), // 👈 new function
-            child: const Icon(CupertinoIcons.clock, color: Colors.blueAccent, size: 24),
+          trailing: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: () => _showRunLog(context),
+                child: const Icon(CupertinoIcons.list_bullet, color: Colors.blueAccent),
+              ),
+              const SizedBox(width: 12),
+              GestureDetector(
+                onTap: () => _showChatHistory(context), // 👈 new function
+                child: const Icon(CupertinoIcons.clock, color: Colors.blueAccent, size: 24),
+              ),
+            ],
           ),
         ),
       ),

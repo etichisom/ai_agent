@@ -38,6 +38,7 @@ class ChatHistoryScreen extends StatelessWidget {
     }
   }
 
+
   Future<void> _confirmDeleteSingle(BuildContext context, ChatMessageModel message) async {
     final l10n = AppLocalizations.of(context);
     final confirm = await showCupertinoDialog<bool>(
