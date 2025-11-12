@@ -25,4 +25,22 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get labelYou => 'Jij';
+
+  @override
+  String get emptyWelcomeTitle => 'Welcome to Ocean GPT';
+
+  @override
+  String get emptyWelcomeSubtitle =>
+      'Ask me about ocean temperatures, salinity, wave patterns, or create stunning visual charts of ocean data.';
+
+  @override
+  String get emptyExamplePrompt =>
+      'Try asking: “Show a heat map of sea surface temperatures in the Pacific Ocean.”';
+
+  @override
+  String get emptyStopTip =>
+      'Tap the stop icon to cancel generation at any time.';
+
+  @override
+  String get snackbarGenerationStopped => '🛑 Generation stopped.';
 }

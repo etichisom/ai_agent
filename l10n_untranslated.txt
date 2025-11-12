@@ -1,1 +1,9 @@
-{}
+{
+  "nl": [
+    "emptyWelcomeTitle",
+    "emptyWelcomeSubtitle",
+    "emptyExamplePrompt",
+    "emptyStopTip",
+    "snackbarGenerationStopped"
+  ]
+}

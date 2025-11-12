@@ -9,10 +9,10 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Agentic Ocean Explorer';
+  String get appTitle => 'Ocean GPT';
 
   @override
-  String get appBarTitle => 'Agentic Ocean Explorer';
+  String get appBarTitle => 'Ocean GPT';
 
   @override
   String get hintTypeMessage => 'Type your message…';
@@ -25,4 +25,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get labelYou => 'You';
+
+  @override
+  String get emptyWelcomeTitle => 'Welcome to Ocean GPT';
+
+  @override
+  String get emptyWelcomeSubtitle =>
+      'Ask me about ocean temperatures, salinity, wave patterns, or create stunning visual charts of ocean data.';
+
+  @override
+  String get emptyExamplePrompt =>
+      'Try asking: “Show a heat map of sea surface temperatures in the Pacific Ocean.”';
+
+  @override
+  String get emptyStopTip =>
+      'Tap the stop icon to cancel generation at any time.';
+
+  @override
+  String get snackbarGenerationStopped => '🛑 Generation stopped.';
 }

@@ -1,10 +1,36 @@
 {
   "@@locale": "en",
-  "appTitle": "Agentic Ocean Explorer",
-  "appBarTitle": "Agentic Ocean Explorer",
+
+  "appTitle": "Ocean GPT",
+  "appBarTitle": "Ocean GPT",
+
   "hintTypeMessage": "Type your message…",
   "labelAI": "AI",
   "labelError": "Error",
-  "labelYou": "You"
-}
+  "labelYou": "You",
 
+  "emptyWelcomeTitle": "Welcome to Ocean GPT",
+  "@emptyWelcomeTitle": {
+    "description": "Main title shown on the empty state screen before the user sends any message."
+  },
+
+  "emptyWelcomeSubtitle": "Ask me about ocean temperatures, salinity, wave patterns, or create stunning visual charts of ocean data.",
+  "@emptyWelcomeSubtitle": {
+    "description": "Subtitle text explaining what Ocean GPT can do."
+  },
+
+  "emptyExamplePrompt": "Try asking: “Show a heat map of sea surface temperatures in the Pacific Ocean.”",
+  "@emptyExamplePrompt": {
+    "description": "Example prompt shown in the empty state hint card."
+  },
+
+  "emptyStopTip": "Tap the stop icon to cancel generation at any time.",
+  "@emptyStopTip": {
+    "description": "Short tip text about the stop button."
+  },
+
+  "snackbarGenerationStopped": "🛑 Generation stopped.",
+  "@snackbarGenerationStopped": {
+    "description": "SnackBar message when user stops generation."
+  }
+}

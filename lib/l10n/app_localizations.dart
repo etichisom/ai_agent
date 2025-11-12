@@ -101,13 +101,13 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'Agentic Ocean Explorer'**
+  /// **'Ocean GPT'**
   String get appTitle;
 
   /// No description provided for @appBarTitle.
   ///
   /// In en, this message translates to:
-  /// **'Agentic Ocean Explorer'**
+  /// **'Ocean GPT'**
   String get appBarTitle;
 
   /// No description provided for @hintTypeMessage.
@@ -133,6 +133,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You'**
   String get labelYou;
+
+  /// Main title shown on the empty state screen before the user sends any message.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Ocean GPT'**
+  String get emptyWelcomeTitle;
+
+  /// Subtitle text explaining what Ocean GPT can do.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask me about ocean temperatures, salinity, wave patterns, or create stunning visual charts of ocean data.'**
+  String get emptyWelcomeSubtitle;
+
+  /// Example prompt shown in the empty state hint card.
+  ///
+  /// In en, this message translates to:
+  /// **'Try asking: “Show a heat map of sea surface temperatures in the Pacific Ocean.”'**
+  String get emptyExamplePrompt;
+
+  /// Short tip text about the stop button.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the stop icon to cancel generation at any time.'**
+  String get emptyStopTip;
+
+  /// SnackBar message when user stops generation.
+  ///
+  /// In en, this message translates to:
+  /// **'🛑 Generation stopped.'**
+  String get snackbarGenerationStopped;
 }
 
 class _AppLocalizationsDelegate
