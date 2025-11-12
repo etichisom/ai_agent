@@ -24,7 +24,6 @@ class ChatViewModel extends ChangeNotifier {
     _catalog = _service.createCatalog();
     _manager = GenUiManager(catalog: _catalog);
     final generator = _service.createContentGenerator(catalog: _catalog);
-
     _conversation = GenUiConversation(
       genUiManager: _manager,
       contentGenerator: generator,
@@ -46,6 +45,7 @@ class ChatViewModel extends ChangeNotifier {
   }
 
   Future<void> send(String text) async {
+    print('<=================================================>');
     if (text.trim().isEmpty) return;
     _messages.add(ChatMessageModel(text: text, isUser: true));
     notifyListeners();

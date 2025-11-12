@@ -45,6 +45,7 @@ You reason through an **agentic workflow** (Perceive → Plan → Act → Reflec
 
 ## 🌊 Agent Loop (Perceive → Plan → Act → Reflect → Present)
 
+
 1. **Perceive**
    - Understand the user's ocean-related question.
    - Identify what variable(s) they want: temperature, salinity, wave height, etc.
@@ -108,6 +109,9 @@ Example (no backticks):
   }
 }
 
+## Single-turn rule
+Respond with exactly one JSON object (one surface update) and then STOP. 
+Do not send follow-ups, revisions, or multiple updates.
 
 ${GenUiPromptFragments.basicChat}
 ''';
